@@ -1,0 +1,34 @@
+{
+  "name": "@xavier/app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "./app",
+    "./server"
+  ],
+  "scripts": {
+    "dev:client": "cd ./app && npm run dev",
+    "dev:server": "cd ./server && npm run dev",
+    "dev": "concurrently \"npm run dev:client\" \"npm run dev:server\"",
+    "generate-types": "openapi-typescript openapi/spec.yaml --output app/shared/types/api.ts",
+    "build:server": "cd ./server && npm run build",
+    "build:client": "cd ./app && npm run build",
+    "build": "concurrently \"pnpm build:client\" \"npm run build:server\"",
+    "start:server": "cd ./server && npm run start",
+    "start:client": "cd ./app && pnpm start",
+    "start": "concurrently \"npm run start:client\" \"npm run start:server\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "openapi-typescript": "^6.7.0"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "punycode": "^2.3.1",
+    "zod": "^3.22.4"
+  }
+}
